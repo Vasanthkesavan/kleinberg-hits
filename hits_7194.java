@@ -55,5 +55,19 @@ public class hits_7194 {
         return a;
     }
 
-    
+    private static double[] toScale(double mValue[]) {
+        double total = 0.0;
+        double a[] = new double[length];
+        int i;
+
+        for(i = 0; i < length; i++) {
+            total += Math.pow(mValue[i], 2);
+        }
+        total = Math.sqrt(total);
+
+        for(i = 0; i < length; i++) {
+            a[i] = (mValue[i]/total);
+        }
+        return a;
+    }
 }
