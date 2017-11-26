@@ -3,13 +3,16 @@ import java.util.Scanner;
 
 public class hits_7194 {
     private static String initialValue;
-    private static int iteration;
+    private static int iterationValue;
     private static int length;
     private static int AdjacencyMatrix[][];
     private static double hub_Vector[];
     private static double authority_Vector[];
     private static double last_HubV[];
     private static double last_AuthorityV[];
+    private static Boolean s_Graph = true;
+    private static String inputFile;
+    private static int transpose_Matrix[][];
 
     /* Private methods for matrix related calculations */
 
@@ -56,7 +59,7 @@ public class hits_7194 {
     }
 
     private static double[] toScale(double mValue[]) {
-        double total = 0.0;
+        Double total = 0.0;
         double a[] = new double[length];
         int i;
 
@@ -69,5 +72,72 @@ public class hits_7194 {
             a[i] = (mValue[i]/total);
         }
         return a;
+    }
+
+    private static Boolean checkArgs(args) {
+        if(args.length == 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static int parseArgInt(val) {
+        return Integer.parseInt(val);
+    }
+
+    public static void main(String[] args) {
+        if(checkArgs(args)) {
+            try{
+                iterationValue = parseArgInt(args[0]);
+                initialValue = args[1];
+                inputFile = args[2];
+
+                Scanner inputStream = new Scanner(new File(inputFile));
+                length = inputStream.nextInt();
+
+                /* Edge Cases */
+                if(length > 10) {
+                    iterationValue = 0;
+                    initialValue = 0
+                    s_Graph = false;
+                }
+
+                if(initialValue.equals("-1")) {
+                    initialValue = String.valueOf((1 / ((float) length)))
+                } else if(initialValue.equals("-2")) {
+                    initialValue = String.valueOf((1 / ((float) Math.sqrt(length))))
+                }
+
+                /* Required matrices and vectors */
+
+                AdjacencyMatrix = new int[length][length];
+                authority_Vector = new double[length];
+                last_AuthorityV = new double[length];
+                hub_Vector = new double[length];
+                last_HubV = new double[length];
+
+                if(initialValue.equals("0") == false) {
+                    for(int i = 0; i < length; i++) {
+                        authority_Vector[i] = Double.parseDouble(initialValue);
+                    }
+
+                    for(int j = 0; j < length; j++) {
+                        hub_Vector[i] = Double.parseDouble(initialValue);
+                    }
+                }
+                
+                while(inputStream.hasNext()) {
+                    int a = inputStream.nextInt();
+                    int b = inputStream.nextInt();
+                    adjacencyMatrix(a, b);
+                }
+
+
+
+            } catch(FileNotFoundException x) {
+                x.printStackTrace();
+            }
+        }
     }
 }
