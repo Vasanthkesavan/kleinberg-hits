@@ -1,3 +1,5 @@
+/* VASANTHAN KESAVAN cs610 7194 prp */
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -32,6 +34,13 @@ public class pgrk_7194 {
 
     private static int parseArgInt(String val) {
         return Integer.parseInt(val);
+    }
+
+    private static String printTheResult(int index, double source) {
+        Float result1 = Float.parseFloat(String.valueOf(source));
+        String result2 = String.format("%.7f", result1 / 1.0);
+        String result = "P[" + " " + index + "]=" + result2 + " ";
+        return result;
     }
 
     public static void main(String[] args) {
@@ -91,9 +100,9 @@ public class pgrk_7194 {
                 }
 
                 if(s_Graph) {
-                    System.out.print("Base: 0 : " );
+                    System.out.print("Base : 0 :" );
                     for(int i = 0; i < length; i++) {
-                        System.out.printf("P[" + i + "]=" + "%.7f" + " ", Float.parseFloat(String.valueOf(source[i])));
+                        System.out.printf(printTheResult(i, source[i]));
                     }
                     System.out.println();
                 }
@@ -124,9 +133,9 @@ public class pgrk_7194 {
                     }
 
                     if(s_Graph) {
-                        System.out.print("Iteration: " + (iterationCount) + ":");
+                        System.out.print("Iter : " + (iterationCount) + " :");
                         for(int i = 0; i < length; i++) {
-                            System.out.printf("P[" + i + "]=" + "%.7f" + " ", Float.parseFloat(String.valueOf(vector[i])));
+                            System.out.printf(printTheResult(i, vector[i]));
                         }
                         System.out.println();
                     }
@@ -145,12 +154,13 @@ public class pgrk_7194 {
                         if(primaryCount == length) {
                             limit = false;
                             if(!s_Graph) {
-                                System.out.print("Iteration: " + iterationCount);
-                                for(int i = 0; i < 4; i++) {
-                                    System.out.printf("P[" + i + "]=" + "%.7f" + " ", Float.parseFloat(String.valueOf(vector[i]) + " "));
+                                System.out.print("Iter   : " + iterationCount);
+                                for(int i = 0; i < 3; i++) {
                                     System.out.println();
+                                    System.out.printf(printTheResult(i, vector[i]) + " ");
                                 }
                                 System.out.println();
+                                System.out.println("     ...other vertices omitted");
                             }
                         }
                     }

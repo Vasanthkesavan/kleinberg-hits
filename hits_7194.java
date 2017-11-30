@@ -1,3 +1,5 @@
+/* VASANTHAN KESAVAN cs610 7194 prp */
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -36,7 +38,6 @@ public class hits_7194 {
     }
 
     private static void showMatrix(String mValue[][]) {
-
         for(int i = 0; i < length; i++) {
             for(int j = 0; j < length; j++) {
                 System.out.print(mValue[i][j] + " ");
@@ -102,6 +103,14 @@ public class hits_7194 {
         return false;
     }
 
+    private static String printTheResult(int index, double authorityValue, double hubValue) {
+        String result1 = String.format("%.7f", authorityValue / 1.0);
+        String result2 = String.format("%.7f", hubValue / 1.0);
+
+        String result = "A/H[" + " " + index + "]=" + result1 + "/" + result2 + " ";
+        return result;
+    }
+
     public static void main(String[] args) {
         if(checkArgs(args)) {
             try{
@@ -128,7 +137,6 @@ public class hits_7194 {
                 }
 
                 /* Required matrices and vectors */
-
                 AdjacencyMatrix = new int[length][length];
                 authority_Vector = new double[length];
                 last_AuthorityV = new double[length];
@@ -153,9 +161,9 @@ public class hits_7194 {
                 int transpose_Matrix[][] = makeTransposeMatrix(AdjacencyMatrix);
 
                 if(s_Graph) {
-                    System.out.print("Base: 0 : ");
-                    for(int i = 0; i < length; i++) {
-                        System.out.printf("A/H[" + i + "]=" + "%.7f" + "/" + "%.7f ", authority_Vector[i], hub_Vector[i]);     
+                    System.out.print("Base : 0 : ");
+                    for(int i = 0; i < length - 1; i++) {
+                        System.out.printf(printTheResult(i, authority_Vector[i], hub_Vector[i]));     
                     }
                     System.out.println();
                 };
@@ -189,10 +197,9 @@ public class hits_7194 {
                     hub_Vector = toScale(hub_Vector);
 
                     if(s_Graph) {
-                        System.out.print("Iteration: " + (iterationCount) + " : ");
-                        for(int i = 0; i < length; i++) {
-                            System.out.printf("A/H[" + i + "]=" + "%.7f" + "/" + "%.7f ", authority_Vector[i], hub_Vector[i]);
-
+                        System.out.print("Iter : " + (iterationCount) + " : ");
+                        for(int i = 0; i < length - 1; i++) {
+                            System.out.printf(printTheResult(i, authority_Vector[i], hub_Vector[i]));
                         }
                         System.out.println();
                     }
@@ -217,12 +224,13 @@ public class hits_7194 {
                         if(primaryCount == length && secondaryCount == length) {
                             limit = false;
                             if(s_Graph == false) {
-                                System.out.println("Iteration: " + (iterationCount));
+                                System.out.println("Iter   : " + (iterationCount));
                                 for(int i = 0; i < 4; i++) {
-                                    System.out.printf("A/H[" + i + "]=" + "%.7f" + "/" + "%.7f ", authority_Vector[i], hub_Vector);
+                                    System.out.printf(printTheResult(i, authority_Vector[i], hub_Vector[i]));
                                     System.out.println();
                                 }
-                                System.out.println();
+                                
+                                System.out.println(" ...");
                             }
                         }
                     }
